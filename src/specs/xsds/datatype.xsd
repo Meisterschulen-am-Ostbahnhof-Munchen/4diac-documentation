@@ -28,6 +28,7 @@
             <xs:element ref="ArrayType"/>
             <xs:element ref="StructuredType"/>
           </xs:choice>
+          <xs:group ref="AttributeGroup"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -94,8 +95,7 @@
 
 
 <xs:complexType name="EnumeratedValue">
-  <xs:attribute name="Name"    type="Identifier" use="optional"/>
-  <xs:attribute name="Comment" type="xs:string"  use="optional"/>
+  <xs:attributeGroup ref="NameCommentAttributes"/>
 </xs:complexType>
 
 
@@ -114,7 +114,6 @@
     </xs:extension>
   </xs:complexContent>
 </xs:complexType>
-
 
 <xs:element name="SubrangeVarDeclaration" type="SubrangeVarDeclaration"/>
 <xs:complexType name="SubrangeVarDeclaration">
