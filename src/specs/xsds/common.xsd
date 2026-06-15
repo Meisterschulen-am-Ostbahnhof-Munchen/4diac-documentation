@@ -15,7 +15,7 @@
 
 <xs:simpleType name="Identifier">
   <xs:restriction base="xs:string">
-    <xs:pattern value="(_|(_?[a-zA-Z0-9]+(_[a-zA-Z0-9]+)*_?))(::(_|(_?[a-zA-Z0-9]+(_[a-zA-Z0-9]+)*_?)))*"/>
+    <xs:pattern value="[_a-zA-Z][a-zA-Z0-9]+(_[a-zA-Z0-9]+)*|[_a-zA-Z]"/>
   </xs:restriction>
 </xs:simpleType>
 
@@ -23,13 +23,13 @@
 <xs:simpleType name="PackageName">
   <xs:restriction base="xs:string">
     <!-- Regex from Identifier needs to be duplicated as XSD can not refer to it -->
-    <xs:pattern value="(_|(_?[a-zA-Z0-9]+(_[a-zA-Z0-9]+)*_?))(::(_|(_?[a-zA-Z0-9]+(_[a-zA-Z0-9]+)*_?)))*"/>
+    <xs:pattern value="([_a-zA-Z][a-zA-Z0-9]+(_[a-zA-Z0-9]+)*|[_a-zA-Z])(::([_a-zA-Z][a-zA-Z0-9]+(_[a-zA-Z0-9]+)*|[_a-zA-Z]))*"/>
   </xs:restriction>
 </xs:simpleType>
 
 <xs:simpleType name="ImportDeclaration">
   <xs:restriction base="xs:string">
-    <xs:pattern value="(_|(_?[a-zA-Z0-9]+(_[a-zA-Z0-9]+)*_?))(::(_|(_?[a-zA-Z0-9]+(_[a-zA-Z0-9]+)*_?)))*(::(\*|(_|(_?[a-zA-Z0-9]+(_[a-zA-Z0-9]+)*_?))))"/>
+    <xs:pattern value="([_a-zA-Z][a-zA-Z0-9]+(_[a-zA-Z0-9]+)*|[_a-zA-Z])(::([_a-zA-Z][a-zA-Z0-9]+(_[a-zA-Z0-9]+)*|[_a-zA-Z]))*(::\*)?"/>
   </xs:restriction>
 </xs:simpleType>
 
@@ -84,7 +84,7 @@
 
 <xs:simpleType name="VersionValueType">
   <xs:restriction base="xs:string">
-    <xs:pattern value="[0-9]+(\.[0-9]+)*[a-zA-Z]?"/>
+    <xs:pattern value="[0-9]{1,2}\.[0-9]{1,2}[a-zA-Z]?"/>
   </xs:restriction>
 </xs:simpleType>
 
@@ -92,7 +92,7 @@
   <xs:attributeGroup ref="NameTypeCommentAttributes"/>
   <xs:attribute name='Value' type='xs:string' use='optional'/>
 </xs:complexType>
- 
+
 <xs:group name="AttributeGroup">
   <xs:sequence>
     <xs:element name="Attribute" type="Attribute" minOccurs="0" maxOccurs="unbounded"/>
@@ -111,6 +111,7 @@
 
 <xs:simpleType name="Coordinate">
   <xs:restriction base="xs:decimal">
+    <xs:fractionDigits value="2"/>
   </xs:restriction>
 </xs:simpleType>
 
