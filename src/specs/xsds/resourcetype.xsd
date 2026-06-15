@@ -19,11 +19,13 @@
   <xs:complexType>
     <xs:complexContent>
       <xs:extension base="LibraryElement">
-        <xs:sequence>
-          <xs:element name="FBTypeName"    type="FBTypeName"    minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element ref="VarDeclaration" minOccurs="0"        maxOccurs="unbounded"/>
-          <xs:element name="SubAppNetwork" type="SubAppNetwork" minOccurs="0" maxOccurs="1"/>
-        </xs:sequence>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="FBTypeName"    type="FBTypeName"/>
+          <xs:element ref="VarDeclaration"/>
+          <xs:element name="SubAppNetwork" type="SubAppNetwork"/>
+          <xs:element name="FBNetwork"     type="FBNetwork"/>
+          <xs:group ref="AttributeGroup"/>
+        </xs:choice>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>

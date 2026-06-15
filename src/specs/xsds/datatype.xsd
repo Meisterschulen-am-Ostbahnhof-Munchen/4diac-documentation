@@ -120,9 +120,12 @@
 </xs:complexType>
 
 <xs:element name="VarDeclaration" type="VarDeclaration"/>
-<xs:complexType name="VarDeclaration">
+<xs:complexType name="VarDeclaration" mixed="true">
   <xs:complexContent>
     <xs:extension base="UserDefinedDataType">
+      <xs:sequence>
+        <xs:group ref="AttributeGroup"/>
+      </xs:sequence>
       <xs:attribute name="Name"      type="Identifier" use="required"/>
       <xs:attribute name="Type"      type="xs:string" use="required"/>
       <xs:attribute name="ArraySize" type="xs:string" use="optional"/>
@@ -131,11 +134,12 @@
 </xs:complexType>
 
 <xs:element name="SubrangeVarDeclaration" type="SubrangeVarDeclaration"/>
-<xs:complexType name="SubrangeVarDeclaration">
+<xs:complexType name="SubrangeVarDeclaration" mixed="true">
   <xs:complexContent>
     <xs:extension base="UserDefinedDataType">
       <xs:sequence>
         <xs:element name="Subrange" type="Subrange" maxOccurs="unbounded"/>
+        <xs:group ref="AttributeGroup"/>
       </xs:sequence>
       <xs:attribute name="Name" type="Identifier"       use="required"/>
       <xs:attribute name="Type" type="SubrangeBaseType" use="required"/>

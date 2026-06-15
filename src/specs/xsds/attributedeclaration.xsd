@@ -27,6 +27,7 @@
             <xs:element ref="ArrayType"/>
             <xs:element ref="StructuredType"/>
           </xs:choice>
+          <xs:group ref="AttributeGroup"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

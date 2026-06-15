@@ -36,21 +36,21 @@
 </xs:element>
 
 <xs:complexType name="BasicFB">
-  <xs:sequence>
-    <xs:element name="InternalVars"      type="InternalVars"      minOccurs="0" maxOccurs="1"/>
-    <xs:element name="InternalConstVars" type="InternalConstVars" minOccurs="0" maxOccurs="1"/>
+  <xs:choice minOccurs="0" maxOccurs="unbounded">
+    <xs:element name="InternalVars"      type="InternalVars"/>
+    <xs:element name="InternalConstVars" type="InternalConstVars"/>
     <xs:element name="ECC"               type="ECC" />
-    <xs:element name="Algorithm"         type="Algorithm"         minOccurs="0" maxOccurs="unbounded"/>
-  </xs:sequence>
+    <xs:element name="Algorithm"         type="Algorithm"/>
+  </xs:choice>
 </xs:complexType>
 
 <xs:complexType name="SimpleFB">
-  <xs:sequence>
-    <xs:element name="InternalVars"      type="InternalVars"      minOccurs="0" maxOccurs="1"/>
-    <xs:element name="InternalConstVars" type="InternalConstVars" minOccurs="0" maxOccurs="1"/>
-    <xs:element name="ECState"           type="ECState"           maxOccurs="unbounded"/>
-    <xs:element name="Algorithm"         type="Algorithm"         minOccurs="0" maxOccurs="unbounded"/>
-  </xs:sequence>
+  <xs:choice minOccurs="0" maxOccurs="unbounded">
+    <xs:element name="InternalVars"      type="InternalVars"/>
+    <xs:element name="InternalConstVars" type="InternalConstVars"/>
+    <xs:element name="ECState"           type="ECState"/>
+    <xs:element name="Algorithm"         type="Algorithm"/>
+  </xs:choice>
 </xs:complexType>
 
 <xs:complexType name="InternalVars">
@@ -92,8 +92,8 @@
 </xs:complexType>
 
 <xs:complexType name="ECAction">
-  <xs:attribute name="Algorithm" type="Identifier" use="required"/>
-  <xs:attribute name="Output"    type="xs:string"  use="required"/>
+  <xs:attribute name="Algorithm" type="Identifier" use="optional"/>
+  <xs:attribute name="Output"    type="xs:string"  use="optional"/>
 </xs:complexType>
 
 <xs:complexType name="Algorithm">

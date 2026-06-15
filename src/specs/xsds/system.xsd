@@ -19,14 +19,14 @@
   <xs:complexType>
     <xs:complexContent>
       <xs:extension base="LibraryElement">
-        <xs:sequence>
-          <xs:element name="Application" type="Application" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element name="Device"      type="Device"      maxOccurs="unbounded"/>
-          <xs:element name="Mapping"     type="Mapping"     minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element name="Segment"     type="Segment"     minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element name="Link"        type="Link"        minOccurs="0" maxOccurs="unbounded"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Application" type="Application"/>
+          <xs:element name="Device"      type="Device"/>
+          <xs:element name="Mapping"     type="Mapping"/>
+          <xs:element name="Segment"     type="Segment"/>
+          <xs:element name="Link"        type="Link"/>
           <xs:group ref="AttributeGroup"/>
-        </xs:sequence>
+        </xs:choice>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -40,43 +40,51 @@
 </xs:complexType>
 
 <xs:complexType name="Mapping">
+  <xs:sequence>
+    <xs:group ref="AttributeGroup"/>
+  </xs:sequence>
   <xs:attribute name="From" type="xs:string" use="required"/>
   <xs:attribute name="To"   type="xs:string" use="required"/>
 </xs:complexType>
 
 <xs:complexType name="Device">
-  <xs:sequence>
-    <xs:element name="Parameter"       type="Parameter"       minOccurs="0" maxOccurs="unbounded"/>
-    <xs:element name="Resource"        type="Resource"        minOccurs="0" maxOccurs="unbounded"/>
-    <xs:element name="DataConnections" type="DataConnections" minOccurs="0" maxOccurs="1"/>
-  </xs:sequence>
+  <xs:choice minOccurs="0" maxOccurs="unbounded">
+    <xs:element name="Parameter"       type="Parameter"/>
+    <xs:element name="Resource"        type="Resource"/>
+    <xs:element name="DataConnections" type="DataConnections"/>
+    <xs:group ref="AttributeGroup"/>
+  </xs:choice>
   <xs:attributeGroup ref="NameTypeCommentAttributes"/>
   <xs:attributeGroup ref="PositionAttributes"/>
 </xs:complexType>
 
 <xs:complexType name="Segment">
-  <xs:sequence>
-    <xs:element name="Parameter" type="Parameter" minOccurs="0" maxOccurs="unbounded"/>
-  </xs:sequence>
+  <xs:choice minOccurs="0" maxOccurs="unbounded">
+    <xs:element name="Parameter" type="Parameter"/>
+    <xs:group ref="AttributeGroup"/>
+  </xs:choice>
   <xs:attributeGroup ref="NameTypeCommentAttributes"/>
   <xs:attributeGroup ref="PositionAttributes"/>
   <xs:attribute name="dx1" type="Coordinate" use="optional"/>
 </xs:complexType>
 
 <xs:complexType name="Link">
-  <xs:sequence>
-    <xs:element name="Parameter" type="Parameter" minOccurs="0" maxOccurs="unbounded"/>
-  </xs:sequence>
+  <xs:choice minOccurs="0" maxOccurs="unbounded">
+    <xs:element name="Parameter" type="Parameter"/>
+    <xs:group ref="AttributeGroup"/>
+  </xs:choice>
   <xs:attribute name="SegmentName"  type="xs:string" use="required"/>
   <xs:attribute name="CommResource" type="xs:string" use="required"/>
   <xs:attribute name="Comment"      type="xs:string" use="optional"/>
 </xs:complexType>
 
 <xs:complexType name="Resource">
-  <xs:sequence>
-    <xs:element name="Parameter" type="Parameter" minOccurs="0" maxOccurs="unbounded"/>
-    <xs:element name="SubAppNetwork" type="SubAppNetwork" minOccurs="0" maxOccurs="1"/>
-  </xs:sequence>
+  <xs:choice minOccurs="0" maxOccurs="unbounded">
+    <xs:element name="Parameter" type="Parameter"/>
+    <xs:element name="SubAppNetwork" type="SubAppNetwork"/>
+    <xs:element name="FBNetwork" type="FBNetwork"/>
+    <xs:group ref="AttributeGroup"/>
+  </xs:choice>
   <xs:attributeGroup ref="NameTypeCommentAttributes"/>
   <xs:attributeGroup ref="PositionAttributes"/>
 </xs:complexType>

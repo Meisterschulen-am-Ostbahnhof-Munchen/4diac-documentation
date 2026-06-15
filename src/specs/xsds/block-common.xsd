@@ -19,15 +19,15 @@
 <!-- FB Interface                                   -->
 <!-- ============================================== -->
 <xs:complexType name="InterfaceList">
-  <xs:sequence>
-    <xs:element name="EventInputs"  type="EventInputs"  minOccurs="0" maxOccurs="1"/>
-    <xs:element name="EventOutputs" type="EventOutputs" minOccurs="0" maxOccurs="1"/>
-    <xs:element name="InputVars"    type="InputVars"    minOccurs="0" maxOccurs="1"/>
-    <xs:element name="OutputVars"   type="OutputVars"   minOccurs="0" maxOccurs="1"/>
-    <xs:element name="InOutVars"    type="InOutVars"    minOccurs="0" maxOccurs="1"/>
-    <xs:element name="Sockets"      type="Sockets"      minOccurs="0" maxOccurs="1"/>
-    <xs:element name="Plugs"        type="Plugs"        minOccurs="0" maxOccurs="1"/>
-  </xs:sequence>
+  <xs:choice minOccurs="0" maxOccurs="unbounded">
+    <xs:element name="EventInputs"  type="EventInputs"/>
+    <xs:element name="EventOutputs" type="EventOutputs"/>
+    <xs:element name="InputVars"    type="InputVars"/>
+    <xs:element name="OutputVars"   type="OutputVars"/>
+    <xs:element name="InOutVars"    type="InOutVars"/>
+    <xs:element name="Sockets"      type="Sockets"/>
+    <xs:element name="Plugs"        type="Plugs"/>
+  </xs:choice>
 </xs:complexType>
 
 <xs:complexType name="EventInputs">
@@ -75,25 +75,31 @@
 <xs:complexType name="Event">
   <xs:sequence>
     <xs:element name="With" type="With" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:group ref="AttributeGroup"/>
   </xs:sequence>
   <xs:attributeGroup ref="NameTypeCommentAttributes"/>
 </xs:complexType>
 
-<xs:complexType name="With">
+<xs:complexType name="With" mixed="true">
   <xs:attribute name="Var" type="Identifier" use="required"/>
 </xs:complexType>
 
 <xs:complexType name="AdapterDeclaration">
   <xs:sequence>
     <xs:element name="Parameter" type="Parameter" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:group ref="AttributeGroup"/>
   </xs:sequence>
   <xs:attributeGroup ref="NameTypeCommentAttributes"/>
   <xs:attributeGroup ref="PositionAttributes"/>
 </xs:complexType>
 
-<xs:complexType name="Parameter">
-  <xs:attributeGroup ref="NameCommentAttributes"/>
-  <xs:attribute name="Value" type="xs:string" use="required"/>
+<xs:complexType name="Parameter" mixed="true">
+  <xs:sequence>
+    <xs:group ref="AttributeGroup"/>
+  </xs:sequence>
+  <xs:attribute name="Name"    type="xs:string"  use="required"/>
+  <xs:attribute name="Comment" type="xs:string"  use="optional"/>
+  <xs:attribute name="Value"   type="xs:string"  use="required"/>
 </xs:complexType>
 
 
@@ -102,10 +108,11 @@
 <!-- ============================================== -->
 <xs:complexType name="Service">
   <xs:sequence>
-    <xs:element name="ServiceSequence" type="ServiceSequence" maxOccurs="unbounded"/>
+    <xs:element name="ServiceSequence" type="ServiceSequence" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:group ref="AttributeGroup"/>
   </xs:sequence>
-  <xs:attribute name="RightInterface" type="xs:string" use="required"/>
-  <xs:attribute name="LeftInterface"  type="xs:string" use="required"/>
+  <xs:attribute name="RightInterface" type="xs:string" use="optional"/>
+  <xs:attribute name="LeftInterface"  type="xs:string" use="optional"/>
   <xs:attribute name="Comment"        type="xs:string" use="optional"/>
 </xs:complexType>
 

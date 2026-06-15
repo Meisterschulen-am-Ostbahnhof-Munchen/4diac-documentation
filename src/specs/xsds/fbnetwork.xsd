@@ -16,14 +16,12 @@
 <xs:include schemaLocation="common.xsd"/>
 
 <xs:complexType name="FBNetwork">
-  <xs:sequence>
-    <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:group ref="CommonFBNetworkElements"/>
-    </xs:choice>
-    <xs:element name="EventConnections"   type="EventConnections"   minOccurs="0"/>
-    <xs:element name="DataConnections"    type="DataConnections"    minOccurs="0"/>
-    <xs:element name="AdapterConnections" type="AdapterConnections" minOccurs="0"/>
-  </xs:sequence>
+  <xs:choice minOccurs="0" maxOccurs="unbounded">
+    <xs:group ref="CommonFBNetworkElements"/>
+    <xs:element name="EventConnections"   type="EventConnections"/>
+    <xs:element name="DataConnections"    type="DataConnections"/>
+    <xs:element name="AdapterConnections" type="AdapterConnections"/>
+  </xs:choice>
 </xs:complexType>
 
 <xs:group name="CommonFBNetworkElements">
@@ -34,7 +32,11 @@
   </xs:choice>
 </xs:group>
 
-<xs:complexType name="FB">
+<xs:complexType name="FB" mixed="true">
+  <xs:choice minOccurs="0" maxOccurs="unbounded">
+    <xs:element name="Parameter" type="Parameter"/>
+    <xs:group ref="AttributeGroup"/>
+  </xs:choice>
   <xs:attributeGroup ref="NameTypeCommentAttributes"/>
   <xs:attributeGroup ref="PositionAttributes"/>
 </xs:complexType>
@@ -56,26 +58,31 @@
 
 <xs:complexType name="EventConnections">
   <xs:sequence>
-    <xs:element name="Connection" type="Connection" maxOccurs="unbounded"/>
+    <xs:element name="Connection" type="Connection" minOccurs="0" maxOccurs="unbounded"/>
   </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="DataConnections">
   <xs:sequence>
-    <xs:element name="Connection" type="Connection" maxOccurs="unbounded"/>
+    <xs:element name="Connection" type="Connection" minOccurs="0" maxOccurs="unbounded"/>
   </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="AdapterConnections">
   <xs:sequence>
-    <xs:element name="Connection" type="Connection" maxOccurs="unbounded"/>
+    <xs:element name="Connection" type="Connection" minOccurs="0" maxOccurs="unbounded"/>
   </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="Connection">
+<xs:complexType name="Connection" mixed="true">
+  <xs:sequence>
+    <xs:group ref="AttributeGroup"/>
+  </xs:sequence>
   <xs:attribute name="Source"      type="xs:string"  use="required"/>
   <xs:attribute name="Destination" type="xs:string"  use="required"/>
   <xs:attribute name="Comment"     type="xs:string"  use="optional"/>
+  <xs:attribute name="dx"          type="Coordinate" use="optional"/>
+  <xs:attribute name="dy"          type="Coordinate" use="optional"/>
   <xs:attribute name="dx1"         type="Coordinate" use="optional"/>
   <xs:attribute name="dx2"         type="Coordinate" use="optional"/>
   <xs:attribute name="y"           type="Coordinate" use="optional"/>

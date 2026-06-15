@@ -19,12 +19,12 @@
   <xs:complexType>
     <xs:complexContent>
       <xs:extension base="LibraryElement">
-        <xs:sequence>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="SubAppInterfaceList" type="SubAppInterfaceList"/>
           <xs:element name="SubAppNetwork"       type="SubAppNetwork"/>
-          <xs:element name="Service"             type="Service" minOccurs="0"/>
+          <xs:element name="Service"             type="Service"/>
           <xs:group ref="AttributeGroup"/>
-        </xs:sequence>
+        </xs:choice>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
