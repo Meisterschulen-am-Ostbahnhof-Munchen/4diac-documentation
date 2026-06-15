@@ -96,7 +96,7 @@
 </xs:attributeGroup>
 
 <xs:attributeGroup name="NameTypeCommentAttributes">
-  <xs:attribute name="Type" type="xs:string" use="required"/>
+  <xs:attribute name="Type" type="xs:string" use="optional"/>
   <xs:attributeGroup ref="NameCommentAttributes"/>
 </xs:attributeGroup>
 

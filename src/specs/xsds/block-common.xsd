@@ -32,43 +32,43 @@
 
 <xs:complexType name="EventInputs">
   <xs:sequence>
-    <xs:element name="Event" type="Event" maxOccurs="unbounded"/>
+    <xs:element name="Event" type="Event" minOccurs="0" maxOccurs="unbounded"/>
   </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="EventOutputs">
   <xs:sequence>
-    <xs:element name="Event" type="Event" maxOccurs="unbounded"/>
+    <xs:element name="Event" type="Event" minOccurs="0" maxOccurs="unbounded"/>
   </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="InputVars">
   <xs:sequence>
-    <xs:element ref="VarDeclaration" maxOccurs="unbounded"/>
+    <xs:element ref="VarDeclaration" minOccurs="0" maxOccurs="unbounded"/>
   </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="OutputVars">
   <xs:sequence>
-    <xs:element ref="VarDeclaration" maxOccurs="unbounded"/>
+    <xs:element ref="VarDeclaration" minOccurs="0" maxOccurs="unbounded"/>
   </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="InOutVars">
   <xs:sequence>
-    <xs:element ref="VarDeclaration" maxOccurs="unbounded"/>
+    <xs:element ref="VarDeclaration" minOccurs="0" maxOccurs="unbounded"/>
   </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="Sockets">
   <xs:sequence>
-    <xs:element name="AdapterDeclaration" type="AdapterDeclaration" maxOccurs="unbounded"/>
+    <xs:element name="AdapterDeclaration" type="AdapterDeclaration" minOccurs="0" maxOccurs="unbounded"/>
   </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="Plugs">
   <xs:sequence>
-    <xs:element name="AdapterDeclaration" type="AdapterDeclaration" maxOccurs="unbounded"/>
+    <xs:element name="AdapterDeclaration" type="AdapterDeclaration" minOccurs="0" maxOccurs="unbounded"/>
   </xs:sequence>
 </xs:complexType>
 
@@ -80,7 +80,7 @@
 </xs:complexType>
 
 <xs:complexType name="With">
-  <xs:attribute name="var" type="Identifier" use="required"/>
+  <xs:attribute name="Var" type="Identifier" use="required"/>
 </xs:complexType>
 
 <xs:complexType name="AdapterDeclaration">

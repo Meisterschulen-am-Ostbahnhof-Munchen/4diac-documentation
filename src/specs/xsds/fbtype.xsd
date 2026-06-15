@@ -71,7 +71,7 @@
 <xs:complexType name="ECC">
   <xs:sequence>
     <xs:element name="ECState"      type="ECState"      maxOccurs="unbounded"/>
-    <xs:element name="ECTransition" type="ECTransition" maxOccurs="unbounded"/>
+    <xs:element name="ECTransition" type="ECTransition" minOccurs="0" maxOccurs="unbounded"/>
   </xs:sequence>
 </xs:complexType>
 
