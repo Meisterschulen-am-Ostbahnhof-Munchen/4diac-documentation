@@ -80,7 +80,7 @@
 </xs:complexType>
 
 <xs:complexType name="With">
-  <xs:attribute name="var" type="Identifier" use="required"/>
+  <xs:attribute name="Var" type="Identifier" use="required"/>
 </xs:complexType>
 
 <xs:complexType name="AdapterDeclaration">
@@ -92,7 +92,10 @@
 </xs:complexType>
 
 <xs:complexType name="Parameter">
-  <xs:attributeGroup ref="NameCommentAttributes"/>
+  <xs:sequence>
+    <xs:element name="Attribute" type="Attribute" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
+  <xs:attributeGroup ref="StructureNameCommentAttributes"/>
   <xs:attribute name="Value" type="xs:string" use="required"/>
 </xs:complexType>
 
@@ -136,5 +139,21 @@
   <xs:attribute name="Event"      type="xs:string" use="required"/>
   <xs:attribute name="Parameters" type="xs:string" use="optional"/>
 </xs:attributeGroup>
+
+<xs:complexType name="ST">
+  <xs:simpleContent>
+    <xs:extension base="xs:string">
+      <xs:attribute name="Text" type="xs:string" use="optional"/>
+    </xs:extension>
+  </xs:simpleContent>
+</xs:complexType>
+
+<xs:complexType name="Other">
+  <xs:simpleContent>
+    <xs:extension base="xs:string">
+      <xs:attribute name="Language" type="xs:string" use="required"/>
+    </xs:extension>
+  </xs:simpleContent>
+</xs:complexType>
 
 </xs:schema>

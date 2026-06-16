@@ -87,13 +87,13 @@
   <xs:attribute name="Source"      type="Identifier" use="required"/>
   <xs:attribute name="Destination" type="Identifier" use="required"/>
   <xs:attribute name="Condition"   type="xs:string"  use="required"/>
-  <xs:attribute name="Comment"     type="xs:string"  use="required"/>
+  <xs:attribute name="Comment"     type="xs:string"  use="optional"/>
   <xs:attributeGroup ref="PositionAttributes"/>
 </xs:complexType>
 
 <xs:complexType name="ECAction">
-  <xs:attribute name="Algorithm" type="Identifier" use="required"/>
-  <xs:attribute name="Output"    type="xs:string"  use="required"/>
+  <xs:attribute name="Algorithm" type="Identifier" use="optional"/>
+  <xs:attribute name="Output"    type="xs:string"  use="optional"/>
 </xs:complexType>
 
 <xs:complexType name="Algorithm">
@@ -104,23 +104,6 @@
     </xs:choice>
   </xs:sequence>
   <xs:attributeGroup ref="NameCommentAttributes"/>
-</xs:complexType>
-
-
-<xs:complexType name="ST">
-  <xs:simpleContent>
-    <xs:extension base="xs:string">
-      <xs:attribute name="Text" type="xs:string" use="optional"/>
-    </xs:extension>
-  </xs:simpleContent>
-</xs:complexType>
-
-<xs:complexType name="Other">
-  <xs:simpleContent>
-    <xs:extension base="xs:string">
-      <xs:attribute name="Language" type="xs:string" use="required"/>
-    </xs:extension>
-  </xs:simpleContent>
 </xs:complexType>
 
 </xs:schema>

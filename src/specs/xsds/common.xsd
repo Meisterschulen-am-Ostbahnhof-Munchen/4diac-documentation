@@ -27,6 +27,12 @@
   </xs:restriction>
 </xs:simpleType>
 
+<xs:simpleType name="StructureName">
+  <xs:restriction base="xs:string">
+    <xs:pattern value="([_a-zA-Z][a-zA-Z0-9]+(_[a-zA-Z0-9]+)*|[_a-zA-Z])(\.([_a-zA-Z][a-zA-Z0-9]+(_[a-zA-Z0-9]+)*|[_a-zA-Z]))*"/>
+  </xs:restriction>
+</xs:simpleType>
+
 <xs:simpleType name="ImportDeclaration">
   <xs:restriction base="xs:string">
     <xs:pattern value="([_a-zA-Z][a-zA-Z0-9]+(_[a-zA-Z0-9]+)*|[_a-zA-Z])(::([_a-zA-Z][a-zA-Z0-9]+(_[a-zA-Z0-9]+)*|[_a-zA-Z]))*(::\*)?"/>
@@ -53,7 +59,7 @@
 </xs:complexType>
 
 <xs:complexType name="VersionInfo">
-  <xs:attribute name="Organization" type="xs:string"        use="required"/>
+  <xs:attribute name="Organization" type="xs:string"        use="optional"/>
   <xs:attribute name="Version"      type="VersionValueType" use="required"/>
   <xs:attribute name="Author"       type="xs:string"        use="required"/>
   <xs:attribute name="Date"         type="xs:string"        use="required"/>
@@ -80,8 +86,14 @@
 </xs:simpleType>
 
 <xs:complexType name='Attribute'>
-  <xs:attributeGroup ref="NameTypeCommentAttributes"/>
-  <xs:attribute name='Value' type='xs:string' use='required'/>
+  <xs:simpleContent>
+    <xs:extension base="xs:string">  <!-- Attributes with Type="CDATA" may have string content instead of value -->
+      <xs:attribute name="Name"    type="PackageName" use="required"/> <!-- For references to attribute declarations full qualified type name may be used -->
+      <xs:attribute name="Type"    type="PackageName" use="optional"/> <!-- For references to attribute declarations type may be omitted -->
+      <xs:attribute name='Value'   type='xs:string'   use='optional'/> <!-- Only optional for attributes with Type="CDATA" and string child content -->
+      <xs:attribute name="Comment" type="xs:string"   use="optional"/>
+    </xs:extension>
+  </xs:simpleContent>
 </xs:complexType>
 
 <xs:group name="AttributeGroup">
@@ -92,6 +104,11 @@
 
 <xs:attributeGroup name="NameCommentAttributes">
   <xs:attribute name="Name"    type="Identifier" use="required"/>
+  <xs:attribute name="Comment" type="xs:string"  use="optional"/>
+</xs:attributeGroup>
+
+<xs:attributeGroup name="StructureNameCommentAttributes">
+  <xs:attribute name="Name"    type="StructureName" use="required"/>
   <xs:attribute name="Comment" type="xs:string"  use="optional"/>
 </xs:attributeGroup>
 

@@ -104,6 +104,9 @@
 
 <xs:element name="VarDeclaration" type="VarDeclaration"/>
 <xs:complexType name="VarDeclaration">
+  <xs:sequence>
+    <xs:element name="Attribute" type="Attribute" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
   <xs:attributeGroup ref="NameTypeCommentAttributes"/>
   <xs:attribute name="ArraySize"    type="xs:string"   use="optional"/>
   <xs:attribute name="InitialValue" type="xs:string"   use="optional"/>
